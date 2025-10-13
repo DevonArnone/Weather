@@ -37,16 +37,16 @@ struct ContentView: View {
         ]
         
         let weeklyData: [WeekForecast] = [
-            WeekForecast(day: "Today", icon: "cloud.fill", temperature1: "50°", temperature2: "58°"),
-            WeekForecast(day: "Mon", icon: "sun.max.fill", temperature1: "54°", temperature2: "61°"),
-            WeekForecast(day: "Tue", icon: "cloud.drizzle.fill", temperature1: "51°", temperature2: "54°"),
-            WeekForecast(day: "Wed", icon: "cloud.rain.fill", temperature1: "49°", temperature2: "53°"),
-            WeekForecast(day: "Thu", icon: "sun.max.fill", temperature1: "58°", temperature2: "48°"),
-            WeekForecast(day: "Fri", icon: "cloud.fill", temperature1: "50°", temperature2: "48°"),
-            WeekForecast(day: "Sat", icon: "snow", temperature1: "52°", temperature2: "48°"),
-            WeekForecast(day: "Sun", icon: "snow", temperature1: "52°", temperature2: "48°"),
-            WeekForecast(day: "Mon", icon: "sun.max.fill", temperature1: "52°", temperature2: "48°"),
-            WeekForecast(day: "Tue", icon: "cloud.fill", temperature1: "52°", temperature2: "48°"),
+            WeekForecast(day: "Today", icon: "cloud.fill", temperature1: "48°", temperature2: "58°"),
+            WeekForecast(day: "Mon", icon: "sun.max.fill", temperature1: "50°", temperature2: "64°"),
+            WeekForecast(day: "Tue", icon: "cloud.drizzle.fill", temperature1: "46°", temperature2: "53°"),
+            WeekForecast(day: "Wed", icon: "cloud.rain.fill", temperature1: "44°", temperature2: "51°"),
+            WeekForecast(day: "Thu", icon: "sun.max.fill", temperature1: "49°", temperature2: "66°"),
+            WeekForecast(day: "Fri", icon: "cloud.fill", temperature1: "47°", temperature2: "55°"),
+            WeekForecast(day: "Sat", icon: "snow", temperature1: "24°", temperature2: "34°"),
+            WeekForecast(day: "Sun", icon: "snow", temperature1: "22°", temperature2: "33°"),
+            WeekForecast(day: "Mon", icon: "sun.max.fill", temperature1: "45°", temperature2: "60°"),
+            WeekForecast(day: "Tue", icon: "cloud.fill", temperature1: "43°", temperature2: "52°"),
         ]
         
         ZStack {
@@ -71,20 +71,23 @@ struct ContentView: View {
                     }
                     .font(.headline)
                     .padding(.bottom, 5)
-                    
-                    HStack {
-                        ForEach (hourlyData) { item in
-                            HourlyForecastView(
-                                time: item.time,
-                                icon: item.icon,
-                                temperature: item.temperature
-                            )
+
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 20) {
+                            ForEach (hourlyData) { item in
+                                HourlyForecastView(
+                                    time: item.time,
+                                    icon: item.icon,
+                                    temperature: item.temperature
+                                )
+                            }
                         }
+                        .padding(.horizontal)
                     }
                     .frame(maxWidth: .infinity)
                 }
                 .padding()
-                .background(Color.white.opacity(0.1))
+                .background(Color.blue.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.vertical, 10)
                 
@@ -108,7 +111,7 @@ struct ContentView: View {
                     }
                 }
                 .padding()
-                .background(Color.white.opacity(0.1))
+                .background(Color.blue.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.vertical, 10)
             }
@@ -128,6 +131,7 @@ struct HourlyForecastView: View {
         VStack {
             Text(time)
             Image(systemName: icon)
+                .symbolRenderingMode(.multicolor)
             Text(temperature)
             
         }
@@ -144,6 +148,7 @@ struct WeekForecastView: View {
         HStack {
             Text(day)
             Image(systemName: icon)
+                .symbolRenderingMode(.multicolor)
             Text(temperature1)
             Text(temperature2)
             
