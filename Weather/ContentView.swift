@@ -30,68 +30,92 @@ struct ContentView: View {
             Forecast(time: "1PM", icon: "sun.max.fill", temperature: "57°"),
             Forecast(time: "2PM", icon: "sun.max.fill", temperature: "58°"),
             Forecast(time: "3PM", icon: "cloud.sun.fill", temperature: "52°"),
-            Forecast(time: "4PM", icon: "sun.max.fill", temperature: "55°")
+            Forecast(time: "4PM", icon: "sun.max.fill", temperature: "55°"),
+            Forecast(time: "5PM", icon: "sun.max.fill", temperature: "56°"),
+            Forecast(time: "6PM", icon: "sun.max.fill", temperature: "58°")
+
         ]
         
         let weeklyData: [WeekForecast] = [
-            WeekForecast(day: "Today", icon: "cloud.fill", temperature1: "50°", temperature2: "52°"),
-            WeekForecast(day: "Mon", icon: "sun.max.fill", temperature1: "52°", temperature2: "50°"),
-            WeekForecast(day: "Tue", icon: "cloud.drizzle", temperature1: "54°", temperature2: "48°"),
-            WeekForecast(day: "Wed", icon: "cloud.rain", temperature1: "56°", temperature2: "48°"),
+            WeekForecast(day: "Today", icon: "cloud.fill", temperature1: "50°", temperature2: "58°"),
+            WeekForecast(day: "Mon", icon: "sun.max.fill", temperature1: "54°", temperature2: "61°"),
+            WeekForecast(day: "Tue", icon: "cloud.drizzle.fill", temperature1: "51°", temperature2: "54°"),
+            WeekForecast(day: "Wed", icon: "cloud.rain.fill", temperature1: "49°", temperature2: "53°"),
             WeekForecast(day: "Thu", icon: "sun.max.fill", temperature1: "58°", temperature2: "48°"),
             WeekForecast(day: "Fri", icon: "cloud.fill", temperature1: "50°", temperature2: "48°"),
             WeekForecast(day: "Sat", icon: "snow", temperature1: "52°", temperature2: "48°"),
-            WeekForecast(day: "Sat", icon: "snow", temperature1: "52°", temperature2: "48°"),
-            WeekForecast(day: "Sat", icon: "sun.max.fill", temperature1: "52°", temperature2: "48°"),
-            WeekForecast(day: "Sat", icon: "cloud.fill", temperature1: "52°", temperature2: "48°"),
+            WeekForecast(day: "Sun", icon: "snow", temperature1: "52°", temperature2: "48°"),
+            WeekForecast(day: "Mon", icon: "sun.max.fill", temperature1: "52°", temperature2: "48°"),
+            WeekForecast(day: "Tue", icon: "cloud.fill", temperature1: "52°", temperature2: "48°"),
         ]
         
-        VStack {
-            Text("Chapel Hill")
-            Text("55°")
-            Text("Sunny")
-            Text("H:58° L:50°")
-            
-            VStack(alignment: .leading) {
-                HStack{
-                    Image(systemName: "clock")
-                    Text("Hourly Forecast")
-                }
-                
-                HStack {
-                    ForEach (hourlyData) { item in
-                        HourlyForecastView(
-                            time: item.time,
-                            icon: item.icon,
-                            temperature: item.temperature
-                        )
-                    }
-                }
-            }
-            .background(Color.blue.opacity(0.6))
-            
-            VStack(alignment: .leading) {
-                HStack{
-                    Image(systemName: "calendar")
-                    Text("10-Day Forecast")
-                }
-                
-                VStack {
-                    ForEach (weeklyData) { item in
-                        WeekForecastView(
-                            day: item.day,
-                            icon: item.icon,
-                            temperature1: item.temperature1,
-                            temperature2: item.temperature2
-                        )
-                    }
-                }
-            }
-        }
-        .padding()
-        .background(
+        ZStack {
             LinearGradient(colors: [.blue, .white], startPoint: .topLeading, endPoint: .bottomTrailing)
-        )
+                .ignoresSafeArea()
+
+            VStack(spacing: 10) {
+                Text("Chapel Hill")
+                    .font(.system(size: 34, weight: .light))
+                Text("55°")
+                    .font(.system(size: 75, weight: .thin))
+                Text("Sunny")
+                    .font(.title2)
+                Text("H:58° L:50°")
+                    .font(.subheadline)
+                    .foregroundStyle(.white.opacity(0.8))
+                
+                VStack(alignment: .leading) {
+                    HStack{
+                        Image(systemName: "clock")
+                        Text("Hourly Forecast")
+                    }
+                    .font(.headline)
+                    .padding(.bottom, 5)
+                    
+                    HStack {
+                        ForEach (hourlyData) { item in
+                            HourlyForecastView(
+                                time: item.time,
+                                icon: item.icon,
+                                temperature: item.temperature
+                            )
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .padding()
+                .background(Color.white.opacity(0.1))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .padding(.vertical, 10)
+                
+                VStack(alignment: .leading) {
+                    HStack{
+                        Image(systemName: "calendar")
+                        Text("10-Day Forecast")
+                    }
+                    .font(.headline)
+                    .padding(.bottom, 5)
+                    
+                    VStack {
+                        ForEach (weeklyData) { item in
+                            WeekForecastView(
+                                day: item.day,
+                                icon: item.icon,
+                                temperature1: item.temperature1,
+                                temperature2: item.temperature2
+                            )
+                        }
+                    }
+                }
+                .padding()
+                .background(Color.white.opacity(0.1))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .padding(.vertical, 10)
+            }
+            .foregroundStyle(.white)
+            .padding(.horizontal)
+            .padding()
+        }
     }
 }
 
