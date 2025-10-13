@@ -10,14 +10,31 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Chapel Hill")
+            Text("55°")
+            Text("Sunny")
+            Text("H:58° L:43°")
+            HStack {
+                
+            }
         }
         .padding()
     }
 }
+
+struct HourlyForecastView: Identifiable {
+    var time: String
+    var icon: String
+    var temperature: String
+    
+    var body: some View {
+        HStack {
+            Text(time)
+            
+        }
+    }
+}
+
 
 #Preview {
     ContentView()
