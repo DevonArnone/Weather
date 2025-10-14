@@ -147,11 +147,17 @@ struct WeekForecastView: View {
     var body: some View {
         HStack {
             Text(day)
-            Image(systemName: icon)
-                .symbolRenderingMode(.multicolor)
+            Image(systemName: icon).symbolRenderingMode(.multicolor)
             Text(temperature1)
+            ZStack {
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(Color.blue.opacity(0.2))
+                    .frame(width: 150, height: 10)
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(Color.blue.opacity(0.4))
+                    .frame(width: 60, height: 10)
+            }
             Text(temperature2)
-            
         }
     }
 }
