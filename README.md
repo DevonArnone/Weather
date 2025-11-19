@@ -44,17 +44,6 @@ All data is hard-coded, making this a great UI sandbox project without worrying 
 	•	Rounded rectangle cards with blue-tinted backgrounds for forecast sections
 	•	Multicolor SF Symbols for icons
 
-## 📂 Project Structure
-
-Weather/
-│── ContentView.swift        // Main UI & sample data
-│── WeatherApp.swift         // App entry point
-│
-├── Assets.xcassets/
-│   ├── AppIcon.appiconset
-│   └── AccentColor.colorset
-
-
 ## 📱 How to Run
 	1.	Open the project in Xcode 15+
 	2.	Select an iOS Simulator (e.g., iPhone 15)
